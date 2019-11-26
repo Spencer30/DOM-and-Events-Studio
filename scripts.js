@@ -7,6 +7,8 @@ window.addEventListener("load", function () {
     let shuttleHeight = 0;
     let rocket = document.getElementById('rocket');
     let moveRocket = 0;
+    let background = document.querySelector('#shuttleBackground');
+    
 
     document.getElementById("takeoff").addEventListener("click", () => {
         let userAnswer = window.confirm('Confirm the shuttle is ready for takeoff');
@@ -38,23 +40,32 @@ window.addEventListener("load", function () {
     document.getElementById('up').addEventListener('click', () => {
         shuttleHeight += 10000
         spaceShuttleHeight.innerHTML = shuttleHeight;
+        moveRocket -= 10;
+        if (moveRocket > 0){
+            rocket.style.transform = `translateY(${moveRocket}px)`;  
+        }    
+        
     });
 
     document.getElementById('down').addEventListener('click', () => {
         shuttleHeight -= 10000
         spaceShuttleHeight.innerHTML = shuttleHeight;
+        moveRocket += 10
+        if (moveRocket < 250){
+            rocket.style.transform = `translateY(${moveRocket}px)`;  
+        }  
     });
 
     document.getElementById('left').addEventListener('click', () => {
         moveRocket -= 10;
-        if (moveRocket > -240){
+        if (moveRocket > -background.clientWidth / 2){
             rocket.style.transform = `translateX(${moveRocket}px)`;  
         }    
     });
 
     document.getElementById('right').addEventListener('click', () => {
         moveRocket += 10;
-        if (moveRocket < 240){
+        if (moveRocket < background.clientWidth / 2){
             rocket.style.transform = `translateX(${moveRocket}px)`;
         }      
     });
